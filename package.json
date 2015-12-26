@@ -1,0 +1,37 @@
+{
+  "name": "hem",
+  "version": "1.0.0",
+  "description": "Half Edge Mesh Data Structure inspired by Keenan Crane DEC course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rezaali/hem.js.git"
+  },
+  "keywords": [
+    "half",
+    "edge",
+    "mesh",
+    "data",
+    "structure",
+    "js",
+    "computational",
+    "geometry",
+    "ycam",
+    "digital",
+    "fabrication",
+    "3d",
+    "webgl"
+  ],
+  "author": "Syed Reza Ali <syed.reza.ali@gmail.com> (http://www.syedrezaali.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rezaali/hem.js/issues"
+  },
+  "homepage": "https://github.com/rezaali/hem.js#readme",
+  "dependencies": {
+    "gl-matrix": "^2.3.1"
+  }
+}

@@ -59,6 +59,17 @@ Mesh.prototype.containsEdge = function( vertexIndex0, vertexIndex1 ) {
   return false;
 }
 
+Mesh.prototype.getEdge = function( vertexIndex0, vertexIndex1 ) {
+  var edgeMap = this.edgeMap;
+  var keys = this.getEdgeKeys( vertexIndex0, vertexIndex1 );
+
+  if( edgeMap[ keys[ 0 ] ] !== undefined &&
+      edgeMap[ keys[ 1 ] ] !== undefined ) {
+    return edgeMap[ keys[ 0 ] ];
+  }
+  return;
+}
+
 Mesh.prototype.setPositions = function( positions ) {
   this.positions = positions.slice();
   var len = positions.length;

@@ -32,6 +32,8 @@
   },
   "homepage": "https://github.com/rezaali/hem.js#readme",
   "dependencies": {
-    "gl-matrix": "^2.3.1"
+    "cga": "^1.0.1",
+    "gl-matrix": "^2.3.1",
+    "guf": "^1.0.0"
   }
 }

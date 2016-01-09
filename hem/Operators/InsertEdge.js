@@ -7,9 +7,8 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   // console.log( 'startVertexIndex:', startVertexIndex );
   // console.log( 'endVertexIndex:', endVertexIndex );
 
-  if( mesh.containsEdge( startVertexIndex, endVertexIndex ) ) {
-    console.log( 'mesh already contains edge: ', mesh.getEdgeKeys( startVertexIndex, endVertexIndex ) );
-    return;
+  if( startVertexIndex === endVertexIndex ) {
+    throw 'illegal edge inseration: ' + startVertexIndex + ' , ' + endVertexIndex;
   }
 
   var edges = mesh.getEdges();
@@ -17,6 +16,12 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   var edgeMap = mesh.getEdgeMap();
   var vertices = mesh.getVertices();
   var faces = mesh.getFaces();
+  var edge = mesh.getEdge( startVertexIndex, endVertexIndex );
+
+  if( edge ) {
+    // console.log( 'mesh already contains edge: ', mesh.getEdgeKeys( startVertexIndex, endVertexIndex ) );
+    return { edge: edge, face: faces[ faceIndex ] };
+  }
 
   var startVertex = vertices[ startVertexIndex ];
   var endVertex = vertices[ endVertexIndex ];

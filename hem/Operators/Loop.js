@@ -1,7 +1,7 @@
 var vec3 = require('gl-matrix').vec3;
 var FaceVertices = require('./../Queries/FaceVertices');
 var VertexNeighbors = require('./../Queries/VertexNeighbors');
-var CreateVertex = require('./CreateVertex');
+var InsertVertex = require('./InsertVertex');
 var InsertEdge = require('./InsertEdge');
 
 module.exports = function( mesh ) {
@@ -69,7 +69,7 @@ module.exports = function( mesh ) {
     vec3.scaleAndAdd( newPos, newPos, halfEdgeTopVertexPos, vertexOppositeFactor );
     vec3.scaleAndAdd( newPos, newPos, halfEdgeFlipTopVertexPos, vertexOppositeFactor );
 
-    newVerts.push( CreateVertex( mesh, edge.getIndex(), newPos ) );
+    newVerts.push( InsertVertex( mesh, edge.getIndex(), newPos ) );
   }
 
   var faces = mesh.getFaces();

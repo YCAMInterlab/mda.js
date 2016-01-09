@@ -1,7 +1,7 @@
 var vec3 = require('gl-matrix').vec3;
 var VertexNeighbors = require('./../Queries/VertexNeighbors');
 var FaceVertices = require('./../Queries/FaceVertices');
-var CreateVertex = require('./CreateVertex');
+var InsertVertex = require('./InsertVertex');
 var InsertEdge = require('./InsertEdge');
 
 module.exports = function( mesh ) {
@@ -11,7 +11,7 @@ module.exports = function( mesh ) {
 
   for( var i = 0; i < elen; i++ ) {
     var edge = edges[ i ];
-    CreateVertex( mesh, edge.getIndex() );
+    InsertVertex( mesh, edge.getIndex() );
   }
 
   var faces = mesh.getFaces();
@@ -39,7 +39,7 @@ module.exports = function( mesh ) {
     var v2 = vertices[ 2 ];
     var v3 = vertices[ 3 ];
     var result = InsertEdge( mesh, faceIndex, v0.getIndex(), v2.getIndex() );
-    var cv = CreateVertex( mesh, result.edge.getIndex() );
+    var cv = InsertVertex( mesh, result.edge.getIndex() );
     edgeVertices[ faceIndex ].push( cv );
     InsertEdge( mesh, faceIndex, v1.getIndex(), cv.getIndex() );
     InsertEdge( mesh, result.face.getIndex(), v3.getIndex(), cv.getIndex() );

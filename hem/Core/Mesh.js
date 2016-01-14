@@ -71,7 +71,7 @@ Mesh.prototype.getEdge = function( vertexIndex0, vertexIndex1 ) {
 }
 
 Mesh.prototype.setPositions = function( positions ) {
-  this.positions = positions.slice();
+  this.positions = positions;
   var len = positions.length;
   for( var i = 0; i < len; i++ ) {
     var vertex = new Vertex();
@@ -197,7 +197,6 @@ Mesh.prototype.process = function() {
           firstHalfEdge = halfedge;
         }
         halfEdges.push( halfedge );
-
         //Set Vertex Properties
         vertex.setHalfEdge( halfedge );
     }

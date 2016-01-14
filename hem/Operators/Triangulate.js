@@ -6,6 +6,7 @@ var quat = require('gl-matrix').quat;
 var InsertEdge = require('./InsertEdge');
 
 module.exports = function( mesh ) {
+  // console.log( 'starting triangulation' );
   var positions = mesh.positions;
   var faces = mesh.getFaces();
   var flen = faces.length;
@@ -49,4 +50,5 @@ module.exports = function( mesh ) {
       InsertEdge( mesh, face.getIndex(), i2, i0 );
     }
   }
+  // console.log( 'finished triangulation' );
 };

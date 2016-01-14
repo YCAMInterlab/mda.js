@@ -1,6 +1,7 @@
 var Face = require('./../Core/Face');
 var Edge = require('./../Core/Edge');
 var HalfEdge = require('./../Core/HalfEdge');
+var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
 
 module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   // console.log( 'faceIndex:', faceIndex );
@@ -34,26 +35,21 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   var hef = he.getFlipHalfEdge();
   do {
     var vertexIndex = he.getVertex().getIndex();
-    var vertexIndexNext = hef.getVertex().getIndex();
+    // var vertexIndexNext = hef.getVertex().getIndex();
 
     if( vertexIndex === startVertexIndex ) {
       halfEdgeA = he;
     }
+
     if( vertexIndex === endVertexIndex ) {
       halfEdgeC = he;
     }
 
-    if( vertexIndexNext === startVertexIndex ) {
-      halfEdgeD = he;
-    }
-    if( vertexIndexNext === endVertexIndex ) {
-      halfEdgeB = he;
-    }
-
     he = he.getNextHalfEdge();
-    hef = he.getFlipHalfEdge();
   } while ( he != faceHalfEdge );
 
+  halfEdgeB = HalfEdgePrev( halfEdgeC );
+  halfEdgeD = HalfEdgePrev( halfEdgeA );
 
   if( halfEdgeA === undefined || halfEdgeB === undefined ||
       halfEdgeC === undefined || halfEdgeD === undefined ) {

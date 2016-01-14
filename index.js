@@ -1,32 +1,32 @@
 // Data Structure
-exports.Edge = require("./hem/Core/Edge.js");
-exports.HalfEdge = require("./hem/Core/HalfEdge.js");
-exports.Vertex = require("./hem/Core/Vertex.js");
-exports.Face = require("./hem/Core/Face.js");
-exports.Mesh = require("./hem/Core/Mesh.js");
+exports.Edge = require("./mda/Core/Edge.js");
+exports.HalfEdge = require("./mda/Core/HalfEdge.js");
+exports.Vertex = require("./mda/Core/Vertex.js");
+exports.Face = require("./mda/Core/Face.js");
+exports.Mesh = require("./mda/Core/Mesh.js");
 
 // Checks
-exports.Integrity = require("./hem/Integrity/Integrity.js");
-exports.MeshIntegrity = require("./hem/Integrity/MeshIntegrity.js");
-exports.FaceIntegrity = require("./hem/Integrity/FaceIntegrity.js");
-exports.EdgeIntegrity = require("./hem/Integrity/EdgeIntegrity.js");
-exports.HalfEdgeIntegrity = require("./hem/Integrity/HalfEdgeIntegrity.js");
-exports.VertexIntegrity = require("./hem/Integrity/VertexIntegrity.js");
+exports.Integrity = require("./mda/Integrity/Integrity.js");
+exports.MeshIntegrity = require("./mda/Integrity/MeshIntegrity.js");
+exports.FaceIntegrity = require("./mda/Integrity/FaceIntegrity.js");
+exports.EdgeIntegrity = require("./mda/Integrity/EdgeIntegrity.js");
+exports.HalfEdgeIntegrity = require("./mda/Integrity/HalfEdgeIntegrity.js");
+exports.VertexIntegrity = require("./mda/Integrity/VertexIntegrity.js");
 
 // Queries
-exports.EdgeVertices = require("./hem/Queries/EdgeVertices.js");
-exports.FaceHalfEdges = require("./hem/Queries/FaceHalfEdges.js");
-exports.FaceVertices = require("./hem/Queries/FaceVertices.js");
-exports.VertexFaces = require("./hem/Queries/VertexFaces.js");
-exports.VertexHalfEdges = require("./hem/Queries/VertexHalfEdges.js");
-exports.VertexNeighbors = require("./hem/Queries/VertexNeighbors.js");
+exports.EdgeVertices = require("./mda/Queries/EdgeVertices.js");
+exports.FaceHalfEdges = require("./mda/Queries/FaceHalfEdges.js");
+exports.FaceVertices = require("./mda/Queries/FaceVertices.js");
+exports.VertexFaces = require("./mda/Queries/VertexFaces.js");
+exports.VertexHalfEdges = require("./mda/Queries/VertexHalfEdges.js");
+exports.VertexNeighbors = require("./mda/Queries/VertexNeighbors.js");
 
 // Operators
-exports.InsertVertexOperator = require("./hem/Operators/InsertVertex.js");
-exports.InsertEdgeOperator = require("./hem/Operators/InsertEdge.js");
-exports.DeleteEdgeOperator = require("./hem/Operators/DeleteEdge.js");
+exports.InsertVertexOperator = require("./mda/Operators/InsertVertex.js");
+exports.InsertEdgeOperator = require("./mda/Operators/InsertEdge.js");
+exports.DeleteEdgeOperator = require("./mda/Operators/DeleteEdge.js");
 
-exports.LoopOperator = require("./hem/Operators/Loop.js");
-exports.CatmullClarkOperator = require("./hem/Operators/CatmullClark.js");
-exports.QuadSubdivideOperator = require("./hem/Operators/QuadSubdivide.js");
-exports.TriangulateOperator = require("./hem/Operators/Triangulate.js");
+exports.LoopOperator = require("./mda/Operators/Loop.js");
+exports.CatmullClarkOperator = require("./mda/Operators/CatmullClark.js");
+exports.QuadSubdivideOperator = require("./mda/Operators/QuadSubdivide.js");
+exports.TriangulateOperator = require("./mda/Operators/Triangulate.js");

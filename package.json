@@ -1,6 +1,6 @@
 {
   "name": "hem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Half Edge Mesh Data Structure inspired by Keenan Crane DEC course",
   "main": "index.js",
   "scripts": {

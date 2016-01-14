@@ -1,14 +1,14 @@
 {
-  "name": "hem",
+  "name": "mda",
   "version": "1.0.1",
-  "description": "Half Edge Mesh Data Structure inspired by Keenan Crane DEC course",
+  "description": "Mesh Data Structure & Algorithms inspired by Keenan Crane DEC course",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rezaali/hem.js.git"
+    "url": "git+https://github.com/rezaali/mda.js.git"
   },
   "keywords": [
     "half",
@@ -28,9 +28,9 @@
   "author": "Syed Reza Ali <syed.reza.ali@gmail.com> (http://www.syedrezaali.com/)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/rezaali/hem.js/issues"
+    "url": "https://github.com/rezaali/mda.js/issues"
   },
-  "homepage": "https://github.com/rezaali/hem.js#readme",
+  "homepage": "https://github.com/rezaali/mda.js#readme",
   "dependencies": {
     "cga": "^1.0.4",
     "gl-matrix": "^2.3.1",

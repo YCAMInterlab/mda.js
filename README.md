@@ -1,2 +1,2 @@
-# hem.js
-half edge mesh data structure in js
+# mda.js
+(half edge) mesh data structure & algorithms in js

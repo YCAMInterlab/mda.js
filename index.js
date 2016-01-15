@@ -14,6 +14,7 @@ exports.HalfEdgeIntegrity = require("./mda/Integrity/HalfEdgeIntegrity.js");
 exports.VertexIntegrity = require("./mda/Integrity/VertexIntegrity.js");
 
 // Queries
+exports.HalfEdgePrev = require("./mda/Queries/HalfEdgePrev.js");
 exports.EdgeVertices = require("./mda/Queries/EdgeVertices.js");
 exports.FaceHalfEdges = require("./mda/Queries/FaceHalfEdges.js");
 exports.FaceVertices = require("./mda/Queries/FaceVertices.js");

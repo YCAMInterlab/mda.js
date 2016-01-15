@@ -1,6 +1,6 @@
 {
   "name": "mda",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Mesh Data Structure & Algorithms inspired by Keenan Crane DEC course",
   "main": "index.js",
   "scripts": {

@@ -44,7 +44,7 @@ module.exports = function( mesh ) {
       var i1 = indicies[ result[ 1 ] ];
       var i2 = indicies[ result[ 2 ] ];
 
-      InsertEdge( mesh, face.getIndex(), i1, i2 );
+      InsertEdge( mesh, i1, i2 );
     }
-  }  
+  }
 };

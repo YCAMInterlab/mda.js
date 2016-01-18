@@ -84,9 +84,9 @@ module.exports = function( mesh ) {
     var v3 = vertices[ 3 ];
     var v5 = vertices[ 5 ];
 
-    result = InsertEdge( mesh, face.getIndex(), v1.getIndex(), v3.getIndex() );
-    result = InsertEdge( mesh, result.face.getIndex(), v3.getIndex(), v5.getIndex() );
-    result = InsertEdge( mesh, result.face.getIndex(), v5.getIndex(), v1.getIndex() );
+    result = InsertEdge( mesh, v1.getIndex(), v3.getIndex() );
+    result = InsertEdge( mesh, v3.getIndex(), v5.getIndex() );
+    result = InsertEdge( mesh, v5.getIndex(), v1.getIndex() );
   }
 
   for( var i = 0; i < plen; i++ ) {

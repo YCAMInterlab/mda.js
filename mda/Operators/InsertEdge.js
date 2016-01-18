@@ -4,7 +4,7 @@ var HalfEdge = require('./../Core/HalfEdge');
 var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
 var VertexHalfEdges = require('./../Queries/VertexHalfEdges');
 
-module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
+module.exports = function( mesh, startVertexIndex, endVertexIndex ) {
   // console.log( 'faceIndex:', faceIndex );
   // console.log( 'startVertexIndex:', startVertexIndex );
   // console.log( 'endVertexIndex:', endVertexIndex );
@@ -22,7 +22,7 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
 
   if( edge ) {
     // console.log( 'mesh already contains edge: ', mesh.getEdgeKeys( startVertexIndex, endVertexIndex ) );
-    return { edge: edge, face: faces[ faceIndex ] };
+    return; //{ edge: edge, face: faces[ edge.getHalfEdge().getFace().getIndex() ] };
   }
 
   var startVertex = vertices[ startVertexIndex ];
@@ -35,7 +35,6 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
 
   for( var i = 0; i < clen; i++ ) {
     var face = faces[ cfaces[ i ] ];
-    // console.log( face );
     var faceHalfEdge = face.getHalfEdge();
     var he = faceHalfEdge;
     do {
@@ -61,6 +60,8 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
     halfEdgeA = undefined;
   }
 
+  // console.log( halfEdgeC );
+  // console.log( halfEdgeA );
   halfEdgeB = HalfEdgePrev( halfEdgeC );
   halfEdgeD = HalfEdgePrev( halfEdgeA );
 
@@ -103,9 +104,10 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   newEdge.setHalfEdge( newHalfEdgeAB );
   face.setHalfEdge( newHalfEdgeAB );
   newFace.setHalfEdge( newHalfEdgeCD );
-
   halfEdgeD.setNextHalfEdge( newHalfEdgeCD );
   halfEdgeB.setNextHalfEdge( newHalfEdgeAB );
+  setHalfEdgeLoopFace( newHalfEdgeCD, newFace );
+  setHalfEdgeLoopFace( newHalfEdgeAB, face );
   return { edge: newEdge, face: newFace };
 };
 
@@ -126,4 +128,12 @@ function commonFaces( vertex0, vertex1 ) {
     }
   }
   return Object.keys( results );
+}
+
+function setHalfEdgeLoopFace( he, face ) {
+  var starthe = he;
+  do {
+    he.setFace( face );
+    he = he.getNextHalfEdge();
+  } while ( he != starthe );
 }

@@ -2,6 +2,7 @@ var Face = require('./../Core/Face');
 var Edge = require('./../Core/Edge');
 var HalfEdge = require('./../Core/HalfEdge');
 var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
+var VertexHalfEdges = require('./../Queries/VertexHalfEdges');
 
 module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   // console.log( 'faceIndex:', faceIndex );
@@ -27,26 +28,38 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   var startVertex = vertices[ startVertexIndex ];
   var endVertex = vertices[ endVertexIndex ];
 
+  var cfaces = commonFaces( startVertex, endVertex );
+  var clen = cfaces.length;
+
   var halfEdgeA, halfEdgeB, halfEdgeC, halfEdgeD;
 
-  var face = faces[ faceIndex ];
-  var faceHalfEdge = face.getHalfEdge();
-  var he = faceHalfEdge;
-  var hef = he.getFlipHalfEdge();
-  do {
-    var vertexIndex = he.getVertex().getIndex();
-    // var vertexIndexNext = hef.getVertex().getIndex();
+  for( var i = 0; i < clen; i++ ) {
+    var face = faces[ cfaces[ i ] ];
+    // console.log( face );
+    var faceHalfEdge = face.getHalfEdge();
+    var he = faceHalfEdge;
+    do {
+      var vertexIndex = he.getVertex().getIndex();
+      // var vertexIndexNext = hef.getVertex().getIndex();
 
-    if( vertexIndex === startVertexIndex ) {
-      halfEdgeA = he;
+      if( vertexIndex === startVertexIndex ) {
+        halfEdgeA = he;
+      }
+
+      if( vertexIndex === endVertexIndex ) {
+        halfEdgeC = he;
+      }
+
+      he = he.getNextHalfEdge();
+    } while ( he != faceHalfEdge );
+
+    if( halfEdgeC != undefined || halfEdgeA != undefined ) {
+      break;
     }
 
-    if( vertexIndex === endVertexIndex ) {
-      halfEdgeC = he;
-    }
-
-    he = he.getNextHalfEdge();
-  } while ( he != faceHalfEdge );
+    halfEdgeC = undefined;
+    halfEdgeA = undefined;
+  }
 
   halfEdgeB = HalfEdgePrev( halfEdgeC );
   halfEdgeD = HalfEdgePrev( halfEdgeA );
@@ -95,3 +108,22 @@ module.exports = function( mesh, faceIndex, startVertexIndex, endVertexIndex ) {
   halfEdgeB.setNextHalfEdge( newHalfEdgeAB );
   return { edge: newEdge, face: newFace };
 };
+
+function commonFaces( vertex0, vertex1 ) {
+  var results = {};
+  var hes0 = VertexHalfEdges( vertex0 );
+  var hes0l = hes0.length;
+  var hes1 = VertexHalfEdges( vertex1 );
+  var hes1l = hes1.length;
+
+  for( var i = 0; i < hes0l; i++ ) {
+    var he0f = hes0[ i ].getFace();
+    for( var j = 0; j < hes1l; j++ ) {
+      var he1f = hes1[ j ].getFace();
+      if( he0f.getIndex() === he1f.getIndex() ) {
+        results[ he0f.getIndex() ] = he1f;
+      }
+    }
+  }
+  return Object.keys( results );
+}

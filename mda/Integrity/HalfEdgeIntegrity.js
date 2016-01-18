@@ -1,3 +1,5 @@
+var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
+
 module.exports = function( halfEdge ) {
   var passed = true;
   var he = halfEdge;
@@ -7,6 +9,10 @@ module.exports = function( halfEdge ) {
   }
   if( he.getFlipHalfEdge() === undefined ) {
     console.log( 'halfEdge: does not have a flip half edge' );
+    passed = false;
+  }
+  if( HalfEdgePrev( he ) === undefined ) {
+    console.log( 'halfEdge: does not have a prev half edge' );
     passed = false;
   }
   if( he.getVertex() === undefined ) {

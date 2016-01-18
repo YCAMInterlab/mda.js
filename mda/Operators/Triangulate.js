@@ -41,14 +41,10 @@ module.exports = function( mesh ) {
     for( var k = 0; k < rlen; k++ ) {
       var result = results[ k ];
 
-      var i0 = indicies[ result[ 0 ] ];
       var i1 = indicies[ result[ 1 ] ];
       var i2 = indicies[ result[ 2 ] ];
 
-      InsertEdge( mesh, face.getIndex(), i0, i1 );
       InsertEdge( mesh, face.getIndex(), i1, i2 );
-      InsertEdge( mesh, face.getIndex(), i2, i0 );
     }
-  }
-  // console.log( 'finished triangulation' );
+  }  
 };

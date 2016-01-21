@@ -1,8 +1,9 @@
-var vec3 = require('gl-matrix').vec3;
 var Face = require('./../Core/Face');
 var Edge = require('./../Core/Edge');
 var Vertex = require('./../Core/Vertex');
 var HalfEdge = require('./../Core/HalfEdge');
+
+var vec3 = require('gl-matrix').vec3;
 
 module.exports = function( mesh, edgeIndex, position ) {
   // when you create a new vertex

@@ -1,10 +1,11 @@
-var vec3 = require('gl-matrix').vec3;
 var VertexNeighbors = require('./../Queries/VertexNeighbors');
 var FaceVertices = require('./../Queries/FaceVertices');
 var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var VertexHalfEdges = require('./../Queries/VertexHalfEdges');
 var InsertVertex = require('./InsertVertex');
 var InsertEdge = require('./InsertEdge');
+
+var vec3 = require('gl-matrix').vec3;
 
 module.exports = function( mesh ) {
   var newPositions = [];
@@ -19,6 +20,14 @@ module.exports = function( mesh ) {
   //calculate new original vertex positions
   var vertices = mesh.getVertices();
   var vlen = vertices.length;
+  var kmap = {};
+
+  for( var i = 3; i < 7; i++ ) {
+    var beta = 3.0 / ( 2.0 * i );
+    var rho = 1.0 / ( 4.0 * i );
+    kmap[ i ] = [ 1.0 - beta - rho, beta / i, rho / i ];
+  }
+
   for( var i = 0; i < vlen; i++ ) {
       var vertex = vertices[ i ];
       var vertexIndex = vertex.getIndex();
@@ -27,21 +36,7 @@ module.exports = function( mesh ) {
       var neighbors = VertexHalfEdges( vertex );
       var nlen = neighbors.length;
 
-      var kernel = [];
-      switch ( nlen ) {
-        case 3: {
-          kernel.push( 15.0 / 36.0, 6.0 / 36.0, 1.0 / 36.0 );
-        }
-          break;
-        case 4: {
-          kernel.push( 36.0 / 64.0, 6.0 / 64.0, 1.0 / 64.0 );
-        }
-          break;
-        case 5: {
-          kernel.push( 65.0 / 100.0, 6.0 / 100.0, 1.0 / 100.0 );
-        }
-          break;
-      }
+      var kernel = kmap[ nlen ];
 
       vec3.copy( newPos, vertexPos );
       vec3.scale( newPos, newPos, kernel[ 0 ] );

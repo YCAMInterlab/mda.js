@@ -21,13 +21,20 @@ exports.FaceVertices = require("./mda/Queries/FaceVertices.js");
 exports.VertexFaces = require("./mda/Queries/VertexFaces.js");
 exports.VertexHalfEdges = require("./mda/Queries/VertexHalfEdges.js");
 exports.VertexNeighbors = require("./mda/Queries/VertexNeighbors.js");
+exports.MeshCentroid = require("./mda/Queries/MeshCentroid.js");
 
 // Operators
 exports.InsertVertexOperator = require("./mda/Operators/InsertVertex.js");
 exports.InsertEdgeOperator = require("./mda/Operators/InsertEdge.js");
 exports.DeleteEdgeOperator = require("./mda/Operators/DeleteEdge.js");
-
 exports.LoopOperator = require("./mda/Operators/Loop.js");
 exports.CatmullClarkOperator = require("./mda/Operators/CatmullClark.js");
 exports.QuadSubdivideOperator = require("./mda/Operators/QuadSubdivide.js");
 exports.TriangulateOperator = require("./mda/Operators/Triangulate.js");
+exports.ExtrudeOperator = require('./mda/Operators/Extrude.js');
+exports.PipeOperator = require('./mda/Operators/Pipe.js');
+exports.DuplicateOperator = require('./mda/Operators/Duplicate.js');
+exports.CombineOperator = require('./mda/Operators/Combine.js');
+exports.ScaleOperator = require('./mda/Operators/Scale.js');
+exports.MoveOperator = require('./mda/Operators/Move.js');
+exports.InvertOperator = require('./mda/Operators/Invert.js');

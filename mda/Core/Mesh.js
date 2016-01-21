@@ -4,8 +4,7 @@ var Edge = require('./Edge');
 var HalfEdge = require('./HalfEdge');
 var Face = require('./Face');
 
-function Mesh()
-{
+function Mesh() {
   this.halfEdges = [];    // Half - check;
   this.vertices = [];     // Vert - check
   this.edges = [];        // Edge - check
@@ -15,38 +14,38 @@ function Mesh()
   this.positions = [];    // For Faster Rendering
   this.cells = [];        // For Faster Rendering
   this.edgeMap = {}      // ( 1 - 3 ) <==> ( 3 - 1 )
-}
+};
 
 Mesh.prototype.getFaces = function() {
   return this.faces;
-}
+};
 
 Mesh.prototype.getEdges = function() {
   return this.edges;
-}
+};
 
 Mesh.prototype.getEdgeMap = function() {
   return this.edgeMap;
-}
+};
 
 Mesh.prototype.getVertices = function() {
   return this.vertices;
-}
+};
 
 Mesh.prototype.getHalfEdges = function() {
   return this.halfEdges;
-}
+};
 
 Mesh.prototype.getEdgeKey = function( vertexIndex0, vertexIndex1 ) {
   return vertexIndex0 + '-' + vertexIndex1;
-}
+};
 
 Mesh.prototype.getEdgeKeys = function( vertexIndex0, vertexIndex1 ) {
   return [
     this.getEdgeKey( vertexIndex0, vertexIndex1 ),
     this.getEdgeKey( vertexIndex1, vertexIndex0 )
    ];
-}
+};
 
 Mesh.prototype.containsEdge = function( vertexIndex0, vertexIndex1 ) {
   var edgeMap = this.edgeMap;
@@ -57,7 +56,7 @@ Mesh.prototype.containsEdge = function( vertexIndex0, vertexIndex1 ) {
     return true;
   }
   return false;
-}
+};
 
 Mesh.prototype.getEdge = function( vertexIndex0, vertexIndex1 ) {
   var edgeMap = this.edgeMap;
@@ -68,7 +67,7 @@ Mesh.prototype.getEdge = function( vertexIndex0, vertexIndex1 ) {
     return edgeMap[ keys[ 0 ] ];
   }
   return;
-}
+};
 
 Mesh.prototype.setPositions = function( positions ) {
   this.positions = positions;
@@ -78,7 +77,7 @@ Mesh.prototype.setPositions = function( positions ) {
     vertex.setIndex( i );
     this.vertices.push( vertex );
   }
-}
+};
 
 Mesh.prototype.getPositions = function() {
   var results = [];
@@ -90,7 +89,7 @@ Mesh.prototype.getPositions = function() {
     results.push( positions[ index ] );
   }
   return results;
-}
+};
 
 Mesh.prototype.setCells = function( cells ) {
   this.cells = cells.slice();
@@ -101,7 +100,7 @@ Mesh.prototype.setCells = function( cells ) {
     this.faces.push( face );
   }
   this.buildEdgeMap();
-}
+};
 
 Mesh.prototype.getCells = function() {
   var results = [];
@@ -121,7 +120,7 @@ Mesh.prototype.getCells = function() {
     results.push( cell );
   }
   return results;
-}
+};
 
 Mesh.prototype.buildEdgeMap = function() {
   var cells = this.cells;
@@ -149,7 +148,7 @@ Mesh.prototype.buildEdgeMap = function() {
       }
     }
   }
-}
+};
 
 Mesh.prototype.process = function() {
   var edgeMap = this.edgeMap;
@@ -204,6 +203,6 @@ Mesh.prototype.process = function() {
     face.setHalfEdge( firstHalfEdge );
     prevHalfEdge.setNextHalfEdge( firstHalfEdge );
   }
-}
+};
 
 module.exports = Mesh;

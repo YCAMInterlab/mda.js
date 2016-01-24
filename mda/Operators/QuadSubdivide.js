@@ -38,10 +38,10 @@ module.exports = function( mesh ) {
     var v1 = vertices[ 1 ];
     var v2 = vertices[ 2 ];
     var v3 = vertices[ 3 ];
-    var result = InsertEdge( mesh, faceIndex, v0.getIndex(), v2.getIndex() );
+    var result = InsertEdge( mesh, v0.getIndex(), v2.getIndex() );
     var cv = InsertVertex( mesh, result.edge.getIndex() );
     edgeVertices[ faceIndex ].push( cv );
-    InsertEdge( mesh, faceIndex, v1.getIndex(), cv.getIndex() );
-    InsertEdge( mesh, result.face.getIndex(), v3.getIndex(), cv.getIndex() );
+    InsertEdge( mesh, v1.getIndex(), cv.getIndex() );
+    InsertEdge( mesh, v3.getIndex(), cv.getIndex() );
   }
 };

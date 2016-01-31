@@ -15,7 +15,6 @@ var vec3 = require('gl-matrix').vec3;
 var zAxis = vec3.fromValues( 0.0, 0.0, 1.0 );
 
 module.exports = function( mesh, faceIndex, distance, scale ) {
-  var centroid = MeshCentroid( mesh );
   var meshVerts = mesh.getVertices();
   var meshHalfEdges = mesh.getHalfEdges();
   var meshEdges = mesh.getEdges();
@@ -27,10 +26,14 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
   var faceHalfEdges = FaceHalfEdges( originalFace );
   var flen = faceHalfEdges.length;
   var originalVertices = [];
+  var center = vec3.create();
   for( var i = 0; i < flen; i++ ) {
     var he = faceHalfEdges[ i ];
-    originalVertices.push( he.getVertex() );
+    var vertex = he.getVertex();
+    var vertexIndex = vertex.getIndex();
+    originalVertices.push( vertex );
   }
+
   var vlen = originalVertices.length;
   var v0 = meshPositions[ originalVertices[ 0 ].getIndex() ];
   var v1 = meshPositions[ originalVertices[ 1 ].getIndex() ];
@@ -43,21 +46,19 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
   var newVertices = [];
   var polygon = [];
   var indicies = [];
-  var center = vec3.create();
   var zOffset = 0.0;
   for( var j = 0; j < vlen; j++ ) {
     var vertex = originalVertices[ j ];
     var vertexIndex = vertex.getIndex();
     var vertexPos = vec3.clone( meshPositions[ vertexIndex ] );
-    vec3.add( center, center, vertexPos );
-    // vec3.subtract( vertexPos, vertexPos, centroid );
     vec3.transformQuat( vertexPos, vertexPos, faceOri );
+    zOffset = vertexPos[ 2 ];
     polygon.push( [ vertexPos[ 0 ], vertexPos[ 1 ] ] );
     indicies.push( vertexIndex );
     newVertices.push( new Vertex() );
   }
+  // console.log( zOffset );
 
-  vec3.scale( center, center, 1.0 / vlen );
   quat.rotationTo( faceOri, zAxis, normal );
 
   var results = expandPolygon( polygon, - ( scale != undefined ? scale : 0.0 ) );
@@ -66,14 +67,14 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
   var newEdges = [];
   var newHalfEdges = [];
 
-  vec3.scale( normal, normal, distance != undefined ? distance : 0.0 );
+
+  zOffset += ( distance != undefined ? distance : 0.0 );  
+
   for( var i = 0; i < rlen; i++ ) {
     var pos = results[ i ];
-    var vpos = vec3.fromValues( pos[ 0 ], pos[ 1 ], 0.0 );
+    var vpos = vec3.fromValues( pos[ 0 ], pos[ 1 ], zOffset );
     vec3.transformQuat( vpos, vpos, faceOri );
-    vec3.add( vpos, vpos, center );
-    vec3.add( vpos, vpos, normal );
-
+    // vec3.add( vpos, vpos, [0,0,zOffset]);
     newPositions.push( vpos );
     var vertex = newVertices[ i ];
     vertex.setIndex( meshPositions.length );

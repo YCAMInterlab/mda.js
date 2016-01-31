@@ -7,7 +7,7 @@ var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var FaceVertices = require('./../Queries/FaceVertices');
 var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
 
-module.exports = function( mesh, faceIndex0, faceIndex1 ) {
+module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
   var meshFaces = mesh.getFaces();
 
   var f0 = meshFaces[ faceIndex0 ];
@@ -25,10 +25,10 @@ module.exports = function( mesh, faceIndex0, faceIndex1 ) {
   }
 
   var faces = [ f0, f1 ];
-
+  var offset = vertexOffset != undefined ? vertexOffset : 0;
   for( var i = 0; i < f0len; i++ ) {
-    var v0i0 = i;
-    var v0i1 = ( i + 1 ) % f0len;
+    var v0i0 = ( i + offset ) % f0len;
+    var v0i1 = ( i + 1 + offset ) % f0len;
 
     var v1i0 = ( f0len - i ) % f0len;
     var v1i1 = ( ( f0len - i ) + 1 ) % f0len;

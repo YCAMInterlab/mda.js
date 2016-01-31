@@ -22,7 +22,7 @@ module.exports = function( mesh ) {
   var vlen = vertices.length;
   var kmap = {};
 
-  for( var i = 3; i < 7; i++ ) {
+  for( var i = 3; i < 12; i++ ) {
     var beta = 3.0 / ( 2.0 * i );
     var rho = 1.0 / ( 4.0 * i );
     kmap[ i ] = [ 1.0 - beta - rho, beta / i, rho / i ];
@@ -37,7 +37,6 @@ module.exports = function( mesh ) {
       var nlen = neighbors.length;
 
       var kernel = kmap[ nlen ];
-
       vec3.copy( newPos, vertexPos );
       vec3.scale( newPos, newPos, kernel[ 0 ] );
 

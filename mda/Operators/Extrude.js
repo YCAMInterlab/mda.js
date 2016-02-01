@@ -5,12 +5,11 @@ var Face = require('./../Core/Face');
 
 var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var MeshCentroid = require('./../Queries/MeshCentroid');
-var vec3 = require('gl-matrix').vec3;
-var quat = require('gl-matrix').quat;
 var calculateNormal = require('guf').calculateNormal;
 var expandPolygon = require('cga').expandPolygon2;
 
 var vec3 = require('gl-matrix').vec3;
+var quat = require('gl-matrix').quat;
 
 var zAxis = vec3.fromValues( 0.0, 0.0, 1.0 );
 
@@ -26,7 +25,6 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
   var faceHalfEdges = FaceHalfEdges( originalFace );
   var flen = faceHalfEdges.length;
   var originalVertices = [];
-  var center = vec3.create();
   for( var i = 0; i < flen; i++ ) {
     var he = faceHalfEdges[ i ];
     var vertex = he.getVertex();
@@ -68,7 +66,7 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
   var newHalfEdges = [];
 
 
-  zOffset += ( distance != undefined ? distance : 0.0 );  
+  zOffset += ( distance != undefined ? distance : 0.0 );
 
   for( var i = 0; i < rlen; i++ ) {
     var pos = results[ i ];

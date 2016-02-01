@@ -38,3 +38,5 @@ exports.CombineOperator = require('./mda/Operators/Combine.js');
 exports.ScaleOperator = require('./mda/Operators/Scale.js');
 exports.MoveOperator = require('./mda/Operators/Move.js');
 exports.InvertOperator = require('./mda/Operators/Invert.js');
+exports.WireframeOperator = require('./mda/Operators/Wireframe.js');
+exports.CreateFaceOperator = require('./mda/Operators/CreateFace.js');

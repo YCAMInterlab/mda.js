@@ -8,8 +8,7 @@ module.exports = function( mesh ) {
   var positions = mesh.getPositions();
   var plen = positions.length;
   for( var i = 0; i < plen; i++ ) {
-    var pos = positions[ i ];
-    newPositions.push( vec3.clone( pos ) );
+    newPositions.push( vec3.clone( positions[ i ] ) );
   }
   newMesh.setPositions( newPositions );
   newMesh.setCells( mesh.getCells() );

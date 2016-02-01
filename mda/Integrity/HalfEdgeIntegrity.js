@@ -10,11 +10,7 @@ module.exports = function( halfEdge ) {
   if( he.getFlipHalfEdge() === undefined ) {
     console.log( 'halfEdge: does not have a flip half edge' );
     passed = false;
-  }
-  if( HalfEdgePrev( he ) === undefined ) {
-    console.log( 'halfEdge: does not have a prev half edge' );
-    passed = false;
-  }
+  }  
   if( he.getVertex() === undefined ) {
     console.log( 'halfEdge: does not have a valid vertex' );
     passed = false;

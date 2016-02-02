@@ -7,6 +7,7 @@ var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var MeshCentroid = require('./../Queries/MeshCentroid');
 var calculateNormal = require('guf').calculateNormal;
 var expandPolygon = require('cga').expandPolygon2;
+var expandPolygon = require('cga').expandPolygon2;
 
 var vec3 = require('gl-matrix').vec3;
 var quat = require('gl-matrix').quat;
@@ -59,12 +60,12 @@ module.exports = function( mesh, faceIndex, distance, scale ) {
 
   quat.rotationTo( faceOri, zAxis, normal );
 
-  var results = expandPolygon( polygon, - ( scale != undefined ? scale : 0.0 ) );
+  var results = expandPolygon( polygon, - ( scale ? scale : 0.00001 ) );
+
   var rlen = results.length;
   var newPositions = [];
   var newEdges = [];
   var newHalfEdges = [];
-
 
   zOffset += ( distance != undefined ? distance : 0.0 );
 

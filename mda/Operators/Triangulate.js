@@ -36,6 +36,7 @@ module.exports = function( mesh ) {
       polygon.push( [ vertexPos[ 0 ], vertexPos[ 1 ] ] );
       indicies.push( vertexIndex );
     }
+
     var results = triangulatePolygon( polygon );
     var rlen = results.length;
     for( var k = 0; k < rlen; k++ ) {

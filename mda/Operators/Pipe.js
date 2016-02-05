@@ -27,8 +27,7 @@ module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
   }
 
   var faces = [ f0, f1 ];
-  var offset = vertexOffset != undefined ? vertexOffset : -2;
-  console.log( f0len );
+  var offset = vertexOffset != undefined ? vertexOffset : 2;
   for( var i = 0; i < f0len; i++ ) {
 
     var v0i0 = i - offset;
@@ -37,8 +36,6 @@ module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
     var v0i1 = ( ( i + 1 ) % f0len ) - offset;
     v0i1 = v0i1 >= f0len ? v0i1 % f0len : v0i1;
     v0i1 = v0i1 < 0 ? f0len + v0i1 : v0i1;
-
-    console.log( v0i0, v0i1 );
 
     var v1i0 = ( f0len - i ) % f0len;
     var v1i1 = ( f0len - ( i + 1 ) );
@@ -54,6 +51,4 @@ module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
       meshFaces.push( result );
     }
   }
-
-  console.log( '--------------' );
 };

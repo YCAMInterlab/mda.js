@@ -2,7 +2,7 @@ var Edge = require('./../Core/Edge');
 var HalfEdge = require('./../Core/HalfEdge');
 var Face = require('./../Core/Face');
 
-module.exports = function createFace( mesh, vertices, face ) {
+module.exports = function( mesh, vertices, face ) {
   var meshEdgeMap = mesh.getEdgeMap();
   var meshFaces = mesh.getFaces();
   var meshHalfEdges = mesh.getHalfEdges();

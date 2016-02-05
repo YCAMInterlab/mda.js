@@ -7,7 +7,6 @@ var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var MeshCentroid = require('./../Queries/MeshCentroid');
 var calculateNormal = require('guf').calculateNormal;
 var expandPolygon = require('cga').expandPolygon2;
-var expandPolygon = require('cga').expandPolygon2;
 
 var vec3 = require('gl-matrix').vec3;
 var quat = require('gl-matrix').quat;

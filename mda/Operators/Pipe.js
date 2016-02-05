@@ -7,6 +7,8 @@ var FaceHalfEdges = require('./../Queries/FaceHalfEdges');
 var FaceVertices = require('./../Queries/FaceVertices');
 var HalfEdgePrev = require('./../Queries/HalfEdgePrev');
 
+var createFace = require('./CreateFace');
+
 module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
   var meshFaces = mesh.getFaces();
 
@@ -25,83 +27,33 @@ module.exports = function( mesh, faceIndex0, faceIndex1, vertexOffset ) {
   }
 
   var faces = [ f0, f1 ];
-  var offset = vertexOffset != undefined ? vertexOffset : 0;
+  var offset = vertexOffset != undefined ? vertexOffset : -2;
+  console.log( f0len );
   for( var i = 0; i < f0len; i++ ) {
-    var v0i0 = ( i + offset ) % f0len;
-    var v0i1 = ( i + 1 + offset ) % f0len;
+
+    var v0i0 = i - offset;
+    v0i0 = v0i0 >= f0len ? v0i0 % f0len : v0i0;
+    v0i0 = v0i0 < 0 ? f0len + v0i0 : v0i0;
+    var v0i1 = ( ( i + 1 ) % f0len ) - offset;
+    v0i1 = v0i1 >= f0len ? v0i1 % f0len : v0i1;
+    v0i1 = v0i1 < 0 ? f0len + v0i1 : v0i1;
+
+    console.log( v0i0, v0i1 );
 
     var v1i0 = ( f0len - i ) % f0len;
-    var v1i1 = ( ( f0len - i ) + 1 ) % f0len;
-
+    var v1i1 = ( f0len - ( i + 1 ) );
     var oldFace = faces[ i ];
     var inputFace = oldFace ? true : false;
     var result = createFace( mesh, [
       f0Vertices[ v0i0 ],
       f0Vertices[ v0i1 ],
-      f1Vertices[ v1i0 ],
-      f1Vertices[ v1i1 ] ], oldFace );
+      f1Vertices[ v1i1 ],
+      f1Vertices[ v1i0 ] ], oldFace );
 
     if( !inputFace ) {
       meshFaces.push( result );
     }
   }
+
+  console.log( '--------------' );
 };
-
-function createFace( mesh, vertices, face ) {
-  var meshEdgeMap = mesh.getEdgeMap();
-  var meshFaces = mesh.getFaces();
-  var meshHalfEdges = mesh.getHalfEdges();
-  var meshEdges = mesh.getEdges();
-
-  if( !face ) {
-    face = new Face();
-    face.setIndex( meshFaces.length );
-  }
-
-  var vlen = vertices.length;
-  var lhe;
-  var hes = [];
-  for( var i = 0; i < vlen; i++ ) {
-    var v0 = vertices[ i ];
-    var v1 = vertices[ ( i + 1 ) % vlen ];
-    var i0 = v0.getIndex();
-    var i1 = v1.getIndex();
-
-    var he = new HalfEdge();
-    var edge = mesh.getEdge( i0, i1 );
-    if( edge ) {
-      var het = edge.getHalfEdge();
-      var hetv = het.getVertex();
-      if( hetv == v0 ) {
-        he = het;
-      }
-      else {
-        he.setFlipHalfEdge( het );
-        het.setFlipHalfEdge( he );
-      }
-    }
-    else {
-      edge = new Edge();
-      var keys = mesh.getEdgeKeys( i0, i1 );
-      edge.setIndex( meshEdges.length );
-      meshEdges.push( edge );
-      edge.setHalfEdge( he );
-      meshEdgeMap[ keys[ 0 ] ] = edge;
-      meshEdgeMap[ keys[ 1 ] ] = edge;
-    }
-
-    //he
-    he.setEdge( edge );
-    he.setFace( face );
-    he.setVertex( v0 );
-    if( lhe ) {
-      lhe.setNextHalfEdge( he );
-    }
-    hes.push( he );
-    lhe = he;
-    meshHalfEdges.push( he );
-  }
-  face.setHalfEdge( lhe );
-  lhe.setNextHalfEdge( hes[ 0 ] );
-  return face;
-}

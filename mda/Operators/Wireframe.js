@@ -117,11 +117,20 @@ module.exports = function( mesh, offset, depth ) {
 
       var f = faces[ i ];
       var add = f == undefined ? true : false;
-      var result = CreateFace( mesh, [ v0, v1, v2, v3 ], f );
+      var result;
+
+      if( depth > 0.0 ) {
+        result = CreateFace( mesh, [ v0, v1, v2, v3 ], f );
+        meshFaces.push( CreateFace( mesh, [ v0e, v3, v2, v1e ] ) );
+      }
+      else {
+        result = CreateFace( mesh, [ v3, v2, v1, v0 ], f );
+        meshFaces.push( CreateFace( mesh, [ v1e, v2, v3, v0e ] ) );
+      }
+
       if( add ) {
         meshFaces.push( result );
       }
-      meshFaces.push( CreateFace( mesh, [ v0e, v3, v2, v1e ] ) );
     }
   }
 };

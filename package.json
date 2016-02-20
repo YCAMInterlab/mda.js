@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rezaali/mda.js.git"
+    "url": "git+https://github.com/YCAMInterlab/mda.js.git"
   },
   "keywords": [
     "half",
@@ -28,9 +28,9 @@
   "author": "Syed Reza Ali <syed.reza.ali@gmail.com> (http://www.syedrezaali.com/)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/rezaali/mda.js/issues"
+    "url": "https://github.com/YCAMInterlab/mda.js/issues"
   },
-  "homepage": "https://github.com/rezaali/mda.js#readme",
+  "homepage": "https://github.com/YCAMInterlab/mda.js#readme",
   "dependencies": {
     "cga": "^1.0.4",
     "gl-matrix": "^2.3.1",

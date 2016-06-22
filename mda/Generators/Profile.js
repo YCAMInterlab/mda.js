@@ -1,6 +1,6 @@
 var Mesh = require('./../Core/Mesh');
 
-module.exports = function( mesh, profile ) {
+module.exports = function( profile ) {
   if( profile.length < 0 || profile[ 0 ].length < 2 ) {
     throw "profile must be a non-zero array of atleast 3 2D positions [ [ x0, y0 ], [ x1, y1 ], [ x2, y2 ] ]";
   }

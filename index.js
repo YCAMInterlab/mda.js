@@ -40,3 +40,6 @@ exports.MoveOperator = require('./mda/Operators/Move.js');
 exports.InvertOperator = require('./mda/Operators/Invert.js');
 exports.WireframeOperator = require('./mda/Operators/Wireframe.js');
 exports.CreateFaceOperator = require('./mda/Operators/CreateFace.js');
+
+// Generator
+exports.ProfileGenerator = require("./mda/Generators/Profile.js");
